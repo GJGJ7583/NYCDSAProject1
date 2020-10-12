@@ -2,6 +2,7 @@
 
 
 
+
 navbarPage(
   "NYC Real Property Taxes",
   tabPanel(
@@ -17,59 +18,32 @@ navbarPage(
         "Map on right shows the highest reductions in assessment values for real properties class 2 (residential) and class 4 (commercial) in NYC in 2018."
       ),
       p(
-        "Please note that there are eleven properties since two residential properties, in very close proximity to each other(overlapping on map), had highest reductions in assessment values in Staten Island."
+        "Please see below further information on these properties: address, borough, block, lot, assessment value and achieved reduction in AV. Please note that there are eleven properties since two residential properties, in very close proximity to each other(overlapping on map), had same highest reductions in assessment values in Staten Island."
       ),
-      tags$ul(
-        tags$li(
-          "Manhattan, Block: 972, Lot: 1, Address: 240 1 Avenue, AV: $1,727,783,000, Reduction: $98,502,350
-"
+      selectInput(
+        "select_top",
+        label = h3("Please Select Property"),
+        choices = list(
+          "Class 2 (residential) in Manhattan" = 1,
+          "Class 4 (commercial) in Manhattan" = 2,
+          "Class 2 (residential) in Brooklyn" = 3,
+          "Class 4 (commercial) in Brooklyn" = 4,
+          "Class 2 (residential) in Bronx" = 5,
+          "Class 4 (commercial) in Bronx" = 6,
+          "Class 2 (residential) in Queens" = 7,
+          "Class 4 (commercial) in Queens" = 8,
+          "Class 2 1st (residential) in Staten Island" = 9,
+          "Class 2 2nd (residential) in Staten Island" = 10,
+          "Class 4 (Commercial) in Staten Island" = 11
         ),
-        tags$li(
-          "Manhattan, Block: 1266, Lot: 1, Address: 1260 Avenue Of The Americas, AV: $1,224,984,000
-, Reduction: $60,742,800
-"
-        ),
-        tags$li(
-          "Brooklyn, Block: 149, Lot: 1006, Address: 70 Fleet Street, AV: $63,068,400
-, Reduction: $11,880,780
-"
-        ),
-        tags$li(
-          "Brooklyn, Block: 4452, Lot: 565, Address: 410 Gateway Drive, AV: $112,698,000
-
-, Reduction: $16,564,100
-"
-        ),
-        tags$li(
-          "Bronx, Block: 5933, Lot: 230, Address: 5961 Paliside Avenue, AV: $26,069,000
-, Reduction: $1,809,050
-"
-        ),
-        tags$li(
-          "Queens, Block: 8489, Lot: 1, Address: 269 Grand CentralL PKWY, AV: $400,782,000, Reduction: $32,351,900
-"
-        ),
-        tags$li(
-          "Queens, Block: 1632, Lot: 20, Address: 100-17 23 Avenue, AV: $53,617,000, Reduction: $12,827,700
-"
-        ),
-        tags$li(
-          "Staten Island, Block: 2894, Lot: 1, Address: 231 Steuben Street, AV: $10,410,000, Reduction: $573,000
-"
-        ),
-        tags$li(
-          "Staten Island, Block: 2893, Lot: 1, Address: 195 Steuben Street, AV: $10,410,000, Reduction: $573,000
-"
-        ),
-        tags$li(
-          "Staten Island, Block: 2440, Lot: 2, Address: 2795 Richmond Avenue, AV: $72,760,000, Reduction: $2,192,000
-"
-        )
+        selected = 1
       )
     ),
-    mainPanel(fluidPage(
-      leafletOutput("nyc_map")
-    )))
+    mainPanel(
+      fluidPage(leafletOutput("nyc_map"),
+                br(),
+                textOutput("property_top"))
+    ))
   ),
   tabPanel("New York City",
            sidebarLayout(
